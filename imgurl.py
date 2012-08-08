@@ -4,7 +4,7 @@
 
 # Script to download random images from imgur.com by generating random images urls
 
-# TODO
+# TO DO
 #
 # Add a function to generate urls by an aldorythm you deside and "wordlists".
 # 
@@ -16,37 +16,37 @@
 import string
 from types import *
 import random
+import itertools
 
 # Variables
 LCL = string.ascii_lowercase	# string with all lowercase letters
 UCL = string.ascii_uppercase	# string with all uppercase letters
 
-numOfPics = 100	# numbers of pictures to download, need to be able to set this vist a -num xx tag. Default is 100
+numOfPics = 10	# numbers of pictures to download, need to be able to set this vist a -num xx tag. Default is 100
 
 imgUrl = "http://i.imgur.com/"
 ext = ".jpg"
 
-# Debugging:
-
-#print LCL
-#print UCL
-#print numOfPics
-
 
 # Functions:
+def randomnes(numOfPics, LCL, UCL):	# generating numOfPic x urls for images
+	rTList = []
+	for _ in itertools.repeat(rTList, numOfPics):
+		
+		r1 = random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
+		r2 = random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
+		r3 = random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
+		r4 = random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
+		r5 = random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
 
-def randomnes(n, LCL, UCL):	# generating random chars for appending the url
-
-	r1 = random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
-	r2 = random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
-	r3 = random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
-	r4 = random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
-	r5 = random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
-
-	rT = r1 + r2 + r3 + r4 + r5
-	return rT
-
+		rT = r1 + r2 + r3 + r4 + r5
+		rTE = rT + ext
+		rTFull = imgUrl + rTE
+		
+		rTList.append(rTFull)
+	return rTList
 
 # Main
-random = randomnes(numOfPics, LCL, UCL)
-print imgUrl + random + ext
+rTList = randomnes(numOfPics, LCL, UCL)
+
+print rTList
