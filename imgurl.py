@@ -78,6 +78,7 @@ def check_sha256sum(f, shaSum):	# Check sha256sum of downloaded image, check if 
 
 
 # Main
-rTFull = randomnes()
-local_file_name = downloadImages(rTFull[0], dlPath, rTFull[1])
-check_sha256sum(local_file_name, shaSum)
+for i in range(numOfPics):
+	rTFull = randomnes()
+	local_file_name = downloadImages(rTFull[0], dlPath, rTFull[1])
+	check_sha256sum(local_file_name, shaSum)
