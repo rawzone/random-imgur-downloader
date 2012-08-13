@@ -1,0 +1,9 @@
+TODO for imgur downloader script
+Things here are not listet in a need to do order...
+
+
+1.) Add check for placeholder image.
+
+2.) Add numOfPics to sys.in arg from terminal.
+
+3.) Create HTML page holding all images (thumbs and link to image).
