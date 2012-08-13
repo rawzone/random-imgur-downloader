@@ -8,6 +8,7 @@
 import random
 import subprocess
 import urllib.request
+import os
 
 
 # Variables
@@ -52,11 +53,29 @@ def downloadImages(rTFull, dlPath, filename):	# Download random generatet image 
 
 def check_sha256sum(f, shaSum):	# Check sha256sum of downloaded image, check if dead image placeholder downloadet, if so download a replacement image.
 	file_name = f
-	output = subprocess.check_output(['sha256sum', file_name])
 	
-	print (output[1])
+	output = subprocess.check_output(['sha256sum', file_name])
 
-	return
+	newShaSum = output[:64]	# grap 64 chars of the shasum
+	newShaSum = newShaSum.decode("utf-8")	# converting it to a string to compare to shaSum
+
+
+	# check if new file is a placeholder
+	if newShaSum == shaSum:
+		print ("Dead image placeholder downloaded...")
+		# Delete image
+		os.remove(file_name)
+		print ("Deleting file", file_name, "and downloading new image...\n")
+
+
+		# Fetch new image
+		rTFull = randomnes()
+		local_file_name = downloadImages(rTFull[0], dlPath, rTFull[1])
+		check_sha256sum(local_file_name, shaSum)
+	else:
+
+		return
+
 
 # Main
 rTFull = randomnes()
