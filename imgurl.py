@@ -19,7 +19,7 @@ shaSum = "9b5936f4006146e4e1e9025b474c02863c0b5614132ad40db4b925a10e8bfbb9"	# sh
 
 
 # Functions
-def randomnes():	# Function to generate random url to an images on imgur.com
+def randomnes():	# Function to generate random url to images on imgur.com
 	
 	ext = ".jpg"
 	
