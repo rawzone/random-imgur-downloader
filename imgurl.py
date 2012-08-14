@@ -9,7 +9,7 @@ import sys
 
 
 # Variables
-numOfPics = 500	# number of pictures to download
+numOfPics = 5	# number of pictures to download
 
 imgUrl = "http://i.imgur.com/"
 
@@ -17,6 +17,7 @@ dlPath = "./output/"	# output dir for images
 
 shaSum = "9b5936f4006146e4e1e9025b474c02863c0b5614132ad40db4b925a10e8bfbb9"	# sha256sum of placeholder image from imgur.com
 
+trys = 1
 
 # Functions
 def randomnes():	# Function to generate random url to an images on imgur.com
@@ -48,7 +49,7 @@ def downloadImages(rTFull, dlPath, filename):	# Download random generatet image 
 	return local_file_name
 
 
-def check_sha256sum(f, shaSum, numOfPics):	# Check sha256sum of downloaded image, check if dead image placeholder downloadet, if so download a replacement image.
+def check_sha256sum(f, shaSum, numOfPics, trys):	# Check sha256sum of downloaded image, check if dead image placeholder downloadet, if so download a replacement image.
 	file_name = f
 	
 	output = subprocess.check_output(['sha256sum', file_name])
@@ -59,19 +60,20 @@ def check_sha256sum(f, shaSum, numOfPics):	# Check sha256sum of downloaded image
 
 	# check if new file is a placeholder
 	if newShaSum == shaSum:
-		
-		print ("Dead image placeholder downloaded...")
+		print ("Try number:", trys, "- dead image placeholder downloaded...")
+		trys += 1
+
 		# Delete image
 		os.remove(file_name)
 		print ("Deleting file", file_name, "and downloading new image...")
 
-
 		# Fetch new image
 		rTFull = randomnes()
 		local_file_name = downloadImages(rTFull[0], dlPath, rTFull[1])
-		check_sha256sum(local_file_name, shaSum, numOfPics)
+		check_sha256sum(local_file_name, shaSum, numOfPics, trys)
 		
 	else:
+		print ("Try number:", trys, "- done!\n")
 
 		return
 
@@ -91,4 +93,4 @@ print ("Need to download", numOfPics, "images...\n")
 for i in range(numOfPics):
 	rTFull = randomnes()
 	local_file_name = downloadImages(rTFull[0], dlPath, rTFull[1])
-	check_sha256sum(local_file_name, shaSum, numOfPics)
+	check_sha256sum(local_file_name, shaSum, numOfPics, trys)
