@@ -9,10 +9,11 @@ import random
 import subprocess
 import urllib.request
 import os
+import sys
 
 
 # Variables
-numOfPics = 5
+numOfPics = 500
 
 imgUrl = "http://i.imgur.com/"
 
@@ -51,7 +52,7 @@ def downloadImages(rTFull, dlPath, filename):	# Download random generatet image 
 	return local_file_name
 
 
-def check_sha256sum(f, shaSum):	# Check sha256sum of downloaded image, check if dead image placeholder downloadet, if so download a replacement image.
+def check_sha256sum(f, shaSum, numOfPics):	# Check sha256sum of downloaded image, check if dead image placeholder downloadet, if so download a replacement image.
 	file_name = f
 	
 	output = subprocess.check_output(['sha256sum', file_name])
@@ -62,23 +63,36 @@ def check_sha256sum(f, shaSum):	# Check sha256sum of downloaded image, check if 
 
 	# check if new file is a placeholder
 	if newShaSum == shaSum:
+		
 		print ("Dead image placeholder downloaded...")
 		# Delete image
 		os.remove(file_name)
-		print ("Deleting file", file_name, "and downloading new image...\n")
+		print ("Deleting file", file_name, "and downloading new image...")
 
 
 		# Fetch new image
 		rTFull = randomnes()
 		local_file_name = downloadImages(rTFull[0], dlPath, rTFull[1])
-		check_sha256sum(local_file_name, shaSum)
+		check_sha256sum(local_file_name, shaSum, numOfPics)
+		
 	else:
 
 		return
 
+def check_output_dir(f):
+	outputDir = os.path.dirname(f)
+	print ("Checking if output folder exist...")
+	if not os.path.exists(outputDir):
+		print ("Output dir not found, making one...\n")
+		os.makedirs(outputDir)
+	else:
+		print ("output folder exists...\n")
+
 
 # Main
+check_output_dir(dlPath)
+print ("Need to download", numOfPics, "images...\n")
 for i in range(numOfPics):
 	rTFull = randomnes()
 	local_file_name = downloadImages(rTFull[0], dlPath, rTFull[1])
-	check_sha256sum(local_file_name, shaSum)
+	check_sha256sum(local_file_name, shaSum, numOfPics)
