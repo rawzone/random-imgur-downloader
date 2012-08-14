@@ -1,8 +1,4 @@
 #!/usr/bin/python3.1
-# By: Hans K. Nielsen
-# hans@rawz0ne.com
-
-# Script for grapping random images of imgur.com
 
 # Imports
 import random
@@ -13,13 +9,13 @@ import sys
 
 
 # Variables
-numOfPics = 500
+numOfPics = 500	# number of pictures to download
 
 imgUrl = "http://i.imgur.com/"
 
-dlPath = "./output/"
+dlPath = "./output/"	# output dir for images
 
-shaSum = "9b5936f4006146e4e1e9025b474c02863c0b5614132ad40db4b925a10e8bfbb9"
+shaSum = "9b5936f4006146e4e1e9025b474c02863c0b5614132ad40db4b925a10e8bfbb9"	# sha256sum of placeholder image from imgur.com
 
 
 # Functions
