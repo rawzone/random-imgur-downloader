@@ -77,6 +77,7 @@ def check_sha256sum(f, shaSum, numOfPics, trys):	# Check sha256sum of downloaded
 
 		return
 
+
 def check_output_dir(f):
 	outputDir = os.path.dirname(f)
 	print ("Checking if output folder exist...")
