@@ -65,7 +65,7 @@ def check_sha256sum(f, shaSum, numOfPics, trys):	# Check sha256sum of downloaded
 
 		# Delete image
 		os.remove(file_name)
-		print ("Deleting file", file_name, "and downloading new image...")
+		print ("\tdeleting file", file_name, "and downloading new image...")
 
 		# Fetch new image
 		rTFull = randomnes()
