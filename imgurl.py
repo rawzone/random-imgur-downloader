@@ -9,7 +9,7 @@ import sys
 
 
 # Variables
-numOfPics = 5	# number of pictures to download
+numOfPics = 300	# number of pictures to download
 
 imgUrl = "http://i.imgur.com/"
 
@@ -65,7 +65,8 @@ def check_sha256sum(f, shaSum, numOfPics, trys):	# Check sha256sum of downloaded
 
 		# Delete image
 		os.remove(file_name)
-		print ("\tdeleting file", file_name, "and downloading new image...")
+		shortFileName = file_name[9:]
+		print ("deleting file", shortFileName, "and downloading new image...\n")
 
 		# Fetch new image
 		rTFull = randomnes()
@@ -73,7 +74,7 @@ def check_sha256sum(f, shaSum, numOfPics, trys):	# Check sha256sum of downloaded
 		check_sha256sum(local_file_name, shaSum, numOfPics, trys)
 		
 	else:
-		print ("Try number:", trys, "- done!\n")
+		print ("Try number:", trys, "- done!\n\n")
 
 		return
 
